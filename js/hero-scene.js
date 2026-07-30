@@ -1,4 +1,4 @@
-/* Terminus hero scene ‚Äî 3D wireframe intermodal yard on <canvas>.
+/* Terminus hero scene — 3D wireframe intermodal yard on <canvas>.
    World units are meters: X runs down the corridor (receding upper-right on screen),
    Y is up, Z runs across the yard (increasing toward screen-left). */
 (function () {
@@ -235,7 +235,7 @@ function circleX(a, cx, cy, cz, r, n) {
 
 /* wheel with rim + hub, plus an inboard rim and tread ties so the tire reads
    as a cylinder (spokes are emitted dynamically); wf = width as a fraction of
-   the radius ‚Äî default suits rubber tires, rail wheels pass a slimmer value */
+   the radius — default suits rubber tires, rail wheels pass a slimmer value */
 function wheelPro(det, x, y, z, r, wf) {
   circleZ(det, x, y, z, r, 10);
   circleZ(det, x, y, z, r * 0.42, 7);
@@ -975,7 +975,7 @@ function buildForkliftTemplate() {
   return { veh, det, whl, wheels, carr, load, beacon: [-1.05, 2.62, 0] };
 }
 
-/* yard truck with skeletal container chassis ‚Äî origin at the container centre, facing +X */
+/* yard truck with skeletal container chassis — origin at the container centre, facing +X */
 function buildYardTruckTemplate() {
   const veh = [], det = [], whl = [];
   /* skeletal chassis: spine rails + cross members + gooseneck */
@@ -1023,14 +1023,14 @@ const TPL = {
   yard: buildYardTruckTemplate()
 };
 
-/* container carried by crane / sitting loose ‚Äî local, centered, y0 = 0 */
+/* container carried by crane / sitting loose — local, centered, y0 = 0 */
 const TPL_BOX = (() => {
   const main = [], det = [];
   container(main, det, -6.1, 0, -1.28, 12.2, 2.6, 2.56, 2);
   return { main, det };
 })();
 
-/* loose palletised crate matching the forklift load ‚Äî centered, y0 at pallet base */
+/* loose palletised crate matching the forklift load — centered, y0 at pallet base */
 const TPL_CRATE = (() => {
   const a = [];
   seg(a, -0.56, 0.18, -0.55, 0.56, 0.18, -0.55);
@@ -1140,7 +1140,7 @@ function queueGlow(x, y, z, r, kind, intensity) {
 }
 
 /* --- night lighting: static pools under the lamps + headlight beam wedges --- */
-const lightPools = []; // {x, z, r, i} ‚Äî i is pre-multiplied with fog at build time
+const lightPools = []; // {x, z, r, i} — i is pre-multiplied with fog at build time
 const frameBeams = [];
 function queueBeam(x, z, dir, len, i) {
   frameBeams.push({ x, z, dir, len, i });
@@ -1209,7 +1209,7 @@ function drawGlows(t) {
 
 /* ---------------------------------------------------------------- actors */
 
-/* --- mainline train: not the crane's customer ‚Äî it rolls straight through
+/* --- mainline train: not the crane's customer — it rolls straight through
        the yard at track speed, exits, and another one follows after a gap --- */
 const train = {
   x: 20, v: 9.5, wheel: 0, gap: 0,
@@ -1323,7 +1323,7 @@ rail.update = function (dt) {
         (o.state === 'work' || o.state === 'spot' || (o.state === 'depart' && o.x - 43.8 < 128)));
       if (!blocker) { c.state = 'spot'; continue; }
       /* follow the track ahead, but never chase the departing train past our
-         own spot point ‚Äî otherwise we'd have to back up to get under the hook */
+         own spot point — otherwise we'd have to back up to get under the hook */
       const holdX = Math.min(blocker.x - 43.8 - 6 - (LOCO_OFF + 10.5), CRANE.x - 34.8);
       const remain = holdX - c.x;
       if (remain > 0.05) {
@@ -1426,14 +1426,14 @@ crane.update = function (dt) {
       if (Math.abs(step.L - this.L) < 0.05) { this.L = step.L; this.hoistV = 0; this.next(); }
       this.vT = 0;
     }
-  } else { // release / attach dwell ‚Äî wait out the countdown AND any residual sway
+  } else { // release / attach dwell — wait out the countdown AND any residual sway
     this.dwell -= dt;
     this.vT = 0;
     if (this.dwell <= 0 && Math.abs(this.theta) < 0.015 && Math.abs(this.omega) < 0.03) this.next();
   }
 
   /* pendulum: theta'' = -(g/L) sin(theta) - c*theta' - a_trolley cos(theta)/L
-     (damping rises near the box handoff ‚Äî the spreader guides act as anti-sway) */
+     (damping rises near the box handoff — the spreader guides act as anti-sway) */
   this.aT = (this.vT - this.prevVT) / Math.max(dt, 1e-4);
   this.prevVT = this.vT;
   const g = 9.81;
@@ -1519,7 +1519,7 @@ crane.draw = function () {
 };
 
 /* --- pad deliveries: yard trucks bring every container the crane picks (z 12 lane).
-       Two trucks rotate ‚Äî one departs loaded-empty while the next is inbound. --- */
+       Two trucks rotate — one departs loaded-empty while the next is inbound. --- */
 const delivery = {
   VMAX: 9, ACC: 1.1, BRK: 1.6,
   list: [
@@ -1796,7 +1796,7 @@ function drawTrucks3() {
 /* --- forklift working the stack aisle: shuttles a pile of crates between the
        two aisle-end stacks, one box at a time. At each stack it stops short,
        raises the forks to the work level, creeps in, picks/places the top
-       crate, backs out and lowers ‚Äî so the forks never cut through the pile. --- */
+       crate, backs out and lowers — so the forks never cut through the pile. --- */
 const forklift = {
   z: 34, v: 0, dir: -1, phase: 'drive', pause: 0, wheel: 0, carry: false,
   lift: 0.25, liftTarget: 0.25,
