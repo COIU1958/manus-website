@@ -1,11 +1,11 @@
 /* ==========================================================================
-   Congress of Independent Unions — v5 "Orano" dark rebuild
-   Navy #081120 · crimson #ef2a48/#d40924 · off-white — thin spaced uppercase display
-   Display: Rajdhani (Blender Pro stand-in) · Body: Nunito Sans · HUD: DM Mono
+   Congress of Independent Unions ‚Äî v5 "Orano" dark rebuild
+   Navy #081120 ¬∑ crimson #ef2a48/#d40924 ¬∑ off-white ‚Äî thin spaced uppercase display
+   Display: Rajdhani (Blender Pro stand-in) ¬∑ Body: Nunito Sans ¬∑ HUD: DM Mono
    ========================================================================== */
 
 :root {
-  /* original ciu1958.org palette: navy #132946 · crimson #d40924 · off-white #f8f8f7 */
+  /* original ciu1958.org palette: navy #132946 ¬∑ crimson #d40924 ¬∑ off-white #f8f8f7 */
   --ink: #081120;
   --ink-2: #0b1830;
   --ink-3: #10233f;
@@ -275,22 +275,22 @@ a { color: inherit; text-decoration: none; }
     var(--ink);
 }
 
-.hero__layer { position: absolute; will-change: transform; }
-.hero__blueprint { inset: 0; width: 100%; height: 100%; }
-.hero__infra {
-  left: 0; right: 0; bottom: 8vh;
+#scene {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: min(46vh, 420px);
+  height: 100%;
+  display: block;
 }
-.hero__net { left: 0; right: 0; bottom: 8vh; width: 100%; height: 100%; }
 
-.svg-label {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  fill: #aeb6c4;
-  opacity: 0.75;
+.hero-veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(3, 7, 19, 0.6) 0%, rgba(3, 7, 19, 0) 15%),
+    linear-gradient(0deg, rgba(3, 7, 19, 0.48) 0%, rgba(3, 7, 19, 0) 17%),
+    radial-gradient(125% 95% at 50% 44%, rgba(0, 0, 0, 0) 62%, rgba(2, 5, 13, 0.5) 100%);
 }
 
 .hero__vignette {
@@ -592,7 +592,7 @@ a { color: inherit; text-decoration: none; }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
 /* ==========================================================================
-   SECTIONS — shared
+   SECTIONS ‚Äî shared
    ========================================================================== */
 .section { padding: clamp(90px, 11vw, 150px) var(--pad-x); }
 
@@ -695,7 +695,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ==========================================================================
-   WHY — pillars
+   WHY ‚Äî pillars
    ========================================================================== */
 .why { position: relative; background: var(--ink-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .why__net {
@@ -758,7 +758,7 @@ a { color: inherit; text-decoration: none; }
 .pillar p { font-size: 14.5px; color: var(--text-dim); }
 
 /* ==========================================================================
-   INDUSTRIES — marquee
+   INDUSTRIES ‚Äî marquee
    ========================================================================== */
 .industries { padding: clamp(90px, 11vw, 150px) 0; overflow: hidden; }
 .industries .section__head { padding: 0 var(--pad-x); }
@@ -991,7 +991,7 @@ a { color: inherit; text-decoration: none; }
     border-radius: 50%;
     border: 1.5px solid rgba(238, 241, 247, 0.4);
     will-change: transform;
-    /* transform is driven per-frame from JS (position + hover scale) —
+    /* transform is driven per-frame from JS (position + hover scale) ‚Äî
        transitioning it here makes the ring lag a full beat behind */
     transition: border-color 0.25s;
   }
@@ -1004,7 +1004,7 @@ a { color: inherit; text-decoration: none; }
    RESPONSIVE
    ========================================================================== */
 @media (max-width: 1439px) {
-  /* the two-line wordmark needs the room — drop the link index numbers */
+  /* the two-line wordmark needs the room ‚Äî drop the link index numbers */
   .nav__links a i { display: none; }
   .nav__links { gap: clamp(16px, 2.2vw, 30px); }
 }
